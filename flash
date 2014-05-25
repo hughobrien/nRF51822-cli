@@ -1,0 +1,48 @@
+#!/bin/sh
+
+# Hugh O'Brien 2014-05-25
+# Program the nRF51822, based on nRF51_Series_Reference_Manual_v2.1.pdf
+# Uses SEGGER JLINK
+
+program="$1"
+address="$2"
+
+usage="usage: flash <hexfile> <address>"
+
+[ -z "$1" ] && echo $usage && exit
+[ -z "$2" ] && echo $usage && exit
+
+script_file="flash.jlink"
+
+write_32bit="w4"
+base_addr="4001e" #non-volatile memory controller
+config_offset="504" #config register, 0 RO, 1 RW, 2 ERASEable
+
+enable_write="1"
+
+select_device="Device nrf51822"
+set_speed="speed 1000" #unit is KHz, nordic docs recommed 1MHz
+write_program="loadbin"
+
+reset_device="r"
+start_device="g"
+close_and_quit="qc"
+
+rm $script_file 2>/dev/null #suppress error if not found
+touch $script_file
+
+
+echo $select_device >> $script_file
+echo $set_speed >> $script_file
+
+echo $write_32bit $base_addr$config_offset $enable_write >> $script_file
+echo $write_program $program $address >> $script_file
+
+echo $reset_device >> $script_file
+echo $start_device >> $script_file
+echo $close_and_quit >> $script_file
+
+
+JLinkExe $script_file
+
+rm $script_file

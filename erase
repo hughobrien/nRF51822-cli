@@ -4,7 +4,7 @@
 # Erase the nRF51822, based on nRF51_Series_Reference_Manual_v2.1.pdf
 # Uses SEGGER JLINK
 
-script_file=erase.jlink
+script_file="erase.jlink"
 
 write_32bit="w4"
 base_addr="4001e" #non-volatile memory controller
@@ -21,7 +21,7 @@ set_speed="speed 1000" #unit is KHz, nordic docs recommed 1MHz
 reset_device="r"
 close_and_quit="qc"
 
-rm $script_file 2>/dev/null #supporess error if not found
+rm $script_file 2>/dev/null #suppress error if not found
 touch $script_file
 
 
