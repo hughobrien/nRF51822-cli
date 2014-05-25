@@ -1,0 +1,40 @@
+#!/bin/sh
+
+# Hugh O'Brien 2014-05-25
+# Erase the nRF51822, based on nRF51_Series_Reference_Manual_v2.1.pdf
+# Uses SEGGER JLINK
+
+script_file=erase.jlink
+
+write_32bit="w4"
+base_addr="4001e" #non-volatile memory controller
+config_offset="504" #config register, 0 RO, 1 RW, 2 ERASEable
+eraseall_offset="50c" # 0 NOP, 1 ERASE, includes user registers (UICRs)
+
+#specific pages in regions 0 or 1 may also be erased
+
+eraseable="2"
+do_erase="1"
+
+select_device="Device nrf51822"
+set_speed="speed 1000" #unit is KHz, nordic docs recommed 1MHz
+reset_device="r"
+close_and_quit="qc"
+
+rm $script_file 2>/dev/null #supporess error if not found
+touch $script_file
+
+
+echo $select_device >> $script_file
+echo $set_speed >> $script_file
+
+echo $write_32bit $base_addr$config_offset $eraseable >> $script_file
+echo $write_32bit $base_addr$eraseall_offset $do_erase >> $script_file
+
+echo $reset_device >> $script_file
+echo $close_and_quit >> $script_file
+
+
+JLinkExe $script_file
+
+rm $script_file
