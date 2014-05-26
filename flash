@@ -32,7 +32,7 @@ case "$(basename "$soft_device")" in
 	s110_nrf51822_6.0.0_softdevice.hex)	region1_start=$s110_v4_v5_v6_code_r1_base ;;
 	s110_nrf51822_7.0.0-3.alpha_softdevice.hex)	region1_start=$s110_v7_code_r1_base ;;
 	s120_nrf51822_1.0.0-3.alpha_softdevice.hex)	region1_start=$s120_v1_code_r1_base ;;
-	*) echo "Unknown softdevice, check docs for r1_base value" && exit ;;
+	*) echo "Unknown SoftDevice, check official docs for r1_base value" && exit ;;
 esac
 
 region0_start="0"
@@ -42,7 +42,7 @@ region0_start="0"
 [ "$(< "$application" head --lines=1 | wc --chars)" != "17" ] &&
 	echo "No Extended Segment Address Record found at the start of the application." &&
 	echo "This places the application within the code space of the SoftDevice." &&
-	echo "Did you use the SoftDevice linker profile?" && exit
+	echo "Was it linked with the correct SoftDevice linker profile?" && exit
 
 device="nrf51822"
 speed="1000" #unit is KHz, nordic docs recommed 1MHz
