@@ -1,9 +1,10 @@
 #!/bin/sh
 
-# Hugh O'Brien 2014-05-25
+# Hugh O'Brien obrien.hugh@gmail.com 2014-05-25
 # Program the nRF51822, based on nRF51_Series_Reference_Manual_v2.1.pdf
 # Uses SEGGER JLINK
 # Presume SoftDevice usage
+# Check application for SoftDevice offset
 
 usage="usage: flash <softdevice> <binary>"
 
@@ -30,6 +31,13 @@ case "$(basename "$soft_device")" in
 esac
 
 region0_start="0"
+
+#The ESAR has a strict format, defined here https://en.wikipedia.org/wiki/Intel_HEX#Format
+#It's also shorter than a normal line, so let's just count characters to detect it.
+[ "$(< "$application" head --lines=1 | wc --chars)" != "17" ] &&
+	echo "No Extended Segment Address Record found at the start of the application." &&
+	echo "This places the application within the code space of the SoftDevice." &&
+	echo "Did you use the SoftDevice linker profile?" && exit
 
 device="nrf51822"
 speed="1000" #unit is KHz, nordic docs recommed 1MHz
