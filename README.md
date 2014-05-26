@@ -3,8 +3,8 @@ nRF51822-cli
 
 Provides a GCC based build system for [nRF51822](https://www.nordicsemi.com/eng/Products/Bluetooth-R-low-energy/nRF51822) projects. 
 
-Handles
-- ~~Compilation~~
+Handles:
+- ~~Compilation~~ (working on it)
 - Flash Programming
 - SoftDevices
 
