@@ -22,6 +22,11 @@ s110_v4_v5_v6_code_r1_base="0x14000"
 #as per s120_nrf51822_1.0.0-3.alpha_program.bat
 s120_v1_code_r1_base="0x18000"
 
+#digging into the GCC linker files in the SDK gives us:
+#s210_code_r1_base="0xC000"
+#s310_code_r1_base="0x20000"
+#perhaps useful in future
+
 case "$(basename "$soft_device")" in
 	s110_nrf51822_5.2.1_softdevice.hex)	region1_start=$s110_v4_v5_v6_code_r1_base ;;
 	s110_nrf51822_6.0.0_softdevice.hex)	region1_start=$s110_v4_v5_v6_code_r1_base ;;
