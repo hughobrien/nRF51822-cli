@@ -4,7 +4,6 @@
 # Erase the nRF51822, based on nRF51_Series_Reference_Manual_v2.1.pdf
 # Uses SEGGER JLINK
 
-script_file="erase.jlink"
 device="nrf51822"
 speed="1000" #unit is KHz, nordic docs recommed 1MHz
 wait_time="300" #unit is ms
@@ -26,6 +25,7 @@ wait="sleep"
 reset_device="r"
 close_and_quit="qc"
 
+script_file="erase.jlink"
 rm $script_file 2>/dev/null #suppress error if not found
 touch $script_file
 
