@@ -20,8 +20,8 @@ I previously used TI's [CC2540](http://www.ti.com/tool/cc2540emk) but their desi
 Usage
 -----
 In practice:
-- ./erase
-- ./flash SoftDevice Application
+<pre>./erase</pre>
+<pre>./flash <SoftDevice> <Application></pre>
 
 flash:
 - An internal lookup table determines the correct code offset for the given SoftDevice.
