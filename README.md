@@ -19,16 +19,16 @@ Usage
 -----
 In practice:
 - ./erase
-- ./flash |SoftDevice| |Application|
+- ./flash SoftDevice Application
 
-The flash command takes as arguments a SoftDevice and an application.
-- An internal lookup table determines the code offset for the given SoftDevice.
-- The application is checked for SoftDevice compatibility.
-- Both are flashed to the device.
+flash:
+- An internal lookup table determines the correct code offset for the given SoftDevice.
+- The application is checked to see if it was linked against a SoftDevice.
+- Both are flashed to the chip.
 
-The erase command takes no arguments.
-- Erasing both region0 and region1 areas, if defined.
-- Erasing the User Information Configuration Registers.
+erase:
+- Erases both region0 and region1 areas, if defined.
+- Erases the User Information Configuration Registers.
 
 Tests
 -----
