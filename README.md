@@ -15,7 +15,7 @@ There are several similar projects available such as [this](https://github.com/h
 
 This project aims to be as simple and well documented as possible, for example, the [very concise](https://github.com/pauloborges/nrf51822-linux-template/blob/master/scripts/erase.jlink) JLink shorthand commands are expanded and [written more naturally](https://github.com/hughobrien/nRF51822-cli/blob/master/flash).
 
-I previously used TI's [CC2540](http://www.ti.com/tool/cc2540emk) but their design all but requires the purchase of a commercial IDE. Thankfully Nordic saw sense.
+I previously used TI's [CC2540](http://www.ti.com/tool/cc2540emk) but their design [all but requires](http://e2e.ti.com/support/wireless_connectivity/f/538/t/195635.aspx) the purchase of a commercial IDE. Thankfully Nordic saw sense.
 
 Usage
 -----
