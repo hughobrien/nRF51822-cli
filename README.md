@@ -21,7 +21,7 @@ Usage
 -----
 In practice:
 <pre>./erase</pre>
-<pre>./flash \<SoftDevice\> \<Application\></pre>
+<pre>./flash SoftDevice Application</pre>
 
 flash:
 - An internal lookup table determines the correct code offset for the given SoftDevice.
