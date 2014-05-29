@@ -4,7 +4,9 @@
 # Program the nRF51822, based on nRF51_Series_Reference_Manual_v2.1.pdf
 # Uses SEGGER JLINK
 # Presume SoftDevice usage
-# Check application for SoftDevice offset
+# Check application for SoftDevice offset however it does not check that
+# the application has been compiled against the correct_ SoftDevice.
+# Perhaps check the ESAR value?
 
 usage="usage: flash <softdevice> <binary>"
 
