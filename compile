@@ -2,7 +2,6 @@
 
 # Hugh O'Brien, obrien.hugh@gmail.com 2013-06-02
 # Shell script to compile for the nrf51822, i.e. avoid 'make'
-set -x
 
 # This folder is contained within nrf51_sdk_v5_2_0_39364.zip (or later).
 sdk="/home/hugh/nrf/nrf51822"
