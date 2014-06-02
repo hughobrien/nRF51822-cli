@@ -48,7 +48,7 @@ Requirements
 ------------
 
 - [nRF51 SDK](https://www.nordicsemi.com/eng/Products/Bluetooth-R-low-energy/nRF51822)
-- [A SoftDevice, s100v5/v6/v7, s120](https://www.nordicsemi.com/eng/Products/Bluetooth-R-low-energy/nRF51822)
+- [An S110 SoftDevice, v6 preferred](https://www.nordicsemi.com/eng/Products/Bluetooth-R-low-energy/nRF51822)
 - [SEGGER JLink](http://www.segger.com/jlink-software.html)
 - [nRF51822 Evaluation Kit board PCA1001](http://www.nordicsemi.com/eng/Products/Bluetooth-R-low-energy/nRF51822-Evaluation-Kit)
 - [GNU Tools for ARM](https://launchpad.net/gcc-arm-embedded)
