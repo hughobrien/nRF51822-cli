@@ -17,18 +17,15 @@ There are several similar projects available such as [this](https://github.com/h
 
 This project aims to be simple and well documented, for example, the [very concise](https://github.com/pauloborges/nrf51822-linux-template/blob/master/scripts/erase.jlink) JLink shorthand commands are expanded and [written more naturally](https://github.com/hughobrien/nRF51822-cli/blob/master/flash).
 
-Version 6 of the S110 SoftDevice currently recommended, and for [simplicity](http://thinking-forth.sourceforge.net/) is hardcoded into this project, this can easily be modified.
+Version 6 of the S110 SoftDevice currently recommended, and for simplicity is hardcoded into this project; this can easily be modified.
 
 Usage
 -----
-In practice:
-<pre>./compile</pre>
-<pre>./erase</pre>
-<pre>./flash</pre>
-<pre>./clean</pre>
+
+Since we know the included 'main.c' blinker compiles successfully, we can test with <pre>./compile; ./erase; ./flash; ./clean</pre>
 
 compile:
-- Calls GCC directly, including the necessary NRF SDK templates.
+- Calls GCC directly on all .c files, including the necessary NRF SDK templates.
 - Avoids 'make' complexity by forcing [tabula rasa](https://en.wikipedia.org/wiki/Tabula_rasa) builds.
 - Links with the correct offsets for the S110 softdevice.
 
@@ -42,8 +39,6 @@ erase:
 
 clean:
 - Remove object files
-
-Since we know the included 'main.c' blinker compiles successfully, we can test with <pre>./compile; ./erase; ./flash; ./clean</pre>
 
 Tests
 -----
