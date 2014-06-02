@@ -1,7 +1,7 @@
 nRF51822-cli
 ============
 
-Provides a GCC based build system for [nRF51822](https://www.nordicsemi.com/eng/Products/Bluetooth-R-low-energy/nRF51822) projects. 
+Provides a minimal GCC based build system for [nRF51822](https://www.nordicsemi.com/eng/Products/Bluetooth-R-low-energy/nRF51822) projects. Avoids [make](https://www.gnu.org/software/make/) in favour of simple shell scripts. Includes JLink flash and erase scripts.
 
 Handles:
 - ~~Compilation~~ (working on it)
@@ -11,22 +11,27 @@ Handles:
 Heritage
 ---------
 
-There are several similar projects available such as [this](https://github.com/hlnd/nrf51-pure-gcc-setup), [that](https://github.com/pauloborges/nrf51822-linux-template), and the [other](https://github.com/EarthLord/nrf51Demo). Each has their own merits.
+There are several similar projects available such as [this](https://github.com/hlnd/nrf51-pure-gcc-setup), [that](https://github.com/pauloborges/nrf51822-linux-template), and the [other](https://github.com/EarthLord/nrf51Demo). Each has their own merits. [This guide](http://www.funwithelectronics.com/?id=168) was also helpful.
 
 This project aims to be as simple and well documented as possible, for example, the [very concise](https://github.com/pauloborges/nrf51822-linux-template/blob/master/scripts/erase.jlink) JLink shorthand commands are expanded and [written more naturally](https://github.com/hughobrien/nRF51822-cli/blob/master/flash).
 
-I previously used TI's [CC2540](http://www.ti.com/tool/cc2540emk) but their design [all but requires](http://e2e.ti.com/support/wireless_connectivity/f/538/t/195635.aspx) the purchase of a commercial IDE. Thankfully Nordic saw sense.
+Version 6 of the S110 SoftDevice currently recommended, and for [simplicity](http://thinking-forth.sourceforge.net/) is largely hardcoded into this project, it is easily modified however.
 
 Usage
 -----
 In practice:
+<pre>./compile</pre>
 <pre>./erase</pre>
 <pre>./flash SoftDevice Application</pre>
 
+compile:
+- Calls GCC directly, including the necessary NRF SDK templates.
+- 'make' is overkill for small projects
+- Links with the correct offsets for the S110 softdevice
+
 flash:
-- An internal lookup table determines the correct code offset for the given SoftDevice.
 - The application is checked to see if it was linked against a SoftDevice.
-- Both are flashed to the chip.
+- Both are then flashed to the chip.
 
 erase:
 - Erases both region0 and region1 areas, if defined.

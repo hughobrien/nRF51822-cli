@@ -1,0 +1,45 @@
+#!/bin/sh
+
+# Hugh O'Brien, obrien.hugh@gmail.com 2013-06-02
+# Shell script to compile for the nrf51822, i.e. avoid 'make'
+set -x
+
+# This folder is contained within nrf51_sdk_v5_2_0_39364.zip (or later).
+sdk="/home/hugh/nrf/nrf51822"
+
+# https://launchpad.net/gcc-arm-embedded
+gcc_dir="/home/hugh/nrf/gcc-arm-none-eabi-4_8-2014q1/bin"
+compiler="$gcc_dir/arm-none-eabi-gcc"
+objcopy="$gcc_dir/arm-none-eabi-objcopy"
+
+# The m0 only supports thumb instructions, see:
+# http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0553a/index.html
+
+# ABI definition:
+# http://infocenter.arm.com/help/topic/com.arm.doc.ihi0042e/IHI0042E_aapcs.pdf
+compiler_args="-mcpu=cortex-m0 -mthumb -mabi=aapcs"
+
+sdk_includes="-I$sdk/Include -I$sdk/Include/gcc"
+
+system_nrf51="$sdk/Source/templates/system_nrf51.c"
+gcc_startup="$sdk/Source/templates/gcc/gcc_startup_nrf51.s"
+
+nrf_delay="$sdk/Source/nrf_delay/nrf_delay.c"
+
+# Required by Include/nrf.h
+sdk_flags="-DNRF51"
+
+linker_includes="-L$sdk/Source/templates/gcc"
+linker_script="-T$sdk/Source/templates/gcc/gcc_nrf51_s110_xxaa.ld"
+
+rm *.out *.hex *.o 2>/dev/null #clean any existing object files
+
+# -c specifies compilation only (no linking)
+$compiler -c $compiler_args $sdk_includes $sdk_flags \
+	$system_nrf51 $gcc_startup $nrf_delay *.c
+
+# link (create a.out in ELF form)
+$compiler $compiler_args $linker_includes $linker_script *.o
+
+# create ihex for flashing
+$objcopy --output-target=ihex a.out a.hex
