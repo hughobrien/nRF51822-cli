@@ -8,6 +8,10 @@ sdk="/home/hugh/nrf/nrf51822"
 
 # https://launchpad.net/gcc-arm-embedded
 gcc_dir="/home/hugh/nrf/gcc-arm-none-eabi-4_8-2014q1/bin"
+
+[ ! -d "$sdk" ] && echo "Set SDK directory" && exit
+[ ! -d "$gcc_dir" ] && echo "Set GCC directory" && exit
+
 compiler="$gcc_dir/arm-none-eabi-gcc"
 objcopy="$gcc_dir/arm-none-eabi-objcopy"
 

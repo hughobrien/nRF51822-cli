@@ -4,6 +4,8 @@
 # Erase the nRF51822, based on nRF51_Series_Reference_Manual_v2.1.pdf
 # Uses SEGGER JLINK
 
+[ -z $(command -v JLinkExe) ] && echo "Put Segger's JLinkExe on the path" && exit
+
 device="nrf51822"
 speed="1000" #unit is KHz, nordic docs recommed 1MHz
 wait_time="300" #unit is ms

@@ -7,14 +7,13 @@
 # Check application for SoftDevice offset however it does not check that
 # the application has been compiled against the _correct_ SoftDevice.
 
-usage="usage: flash <softdevice> <binary>"
+[ -z $(command -v JLinkExe) ] && echo "Put Segger's JLinkExe on the path" && exit
 
-[ -z "$1" ] && echo $usage && exit
-[ -z "$2" ] && echo $usage && exit
+soft_device="/home/hugh/nrf/s110/s110_nrf51822_6.0.0_softdevice.hex"
+application="a.hex"
 
-
-soft_device="$1"
-application="$2"
+[ ! -f "$soft_device" ] && echo "Set SoftDevice Path" && exit
+[ ! -f "$application" ] && echo "$application not found" && exit
 
 #as per s110_nrf51822_7.0.0-3.alpha_migration_document.pdf
 #s110_v7_code_r1_base="0x15000"
