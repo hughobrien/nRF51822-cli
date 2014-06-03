@@ -20,7 +20,11 @@ objcopy="$gcc_dir/arm-none-eabi-objcopy"
 
 # ABI definition:
 # http://infocenter.arm.com/help/topic/com.arm.doc.ihi0042e/IHI0042E_aapcs.pdf
-compiler_args="-mcpu=cortex-m0 -mthumb -mabi=aapcs"
+
+# GCC ARM options:
+#http://gcc.gnu.org/onlinedocs/gcc/ARM-Options.html
+# Optimisations like -Os (size) can be set here
+compiler_args="-mcpu=cortex-m0 -mthumb -mabi=aapcs -Wall"
 
 sdk_includes="-I$sdk/Include -I$sdk/Include/gcc"
 
