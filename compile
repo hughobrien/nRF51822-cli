@@ -7,13 +7,15 @@
 sdk="/home/hugh/nrf/nrf51822"
 
 # https://launchpad.net/gcc-arm-embedded
-gcc_dir="/home/hugh/nrf/gcc-arm-none-eabi-4_8-2014q1/bin"
+gcc_dir="/home/hugh/nrf/gcc-arm-none-eabi-4_8-2014q1"
 
 [ ! -d "$sdk" ] && echo "Set SDK directory" && exit
 [ ! -d "$gcc_dir" ] && echo "Set GCC directory" && exit
 
-compiler="$gcc_dir/arm-none-eabi-gcc"
-objcopy="$gcc_dir/arm-none-eabi-objcopy"
+compiler="$gcc_dir/bin/arm-none-eabi-gcc"
+objcopy="$gcc_dir/bin/arm-none-eabi-objcopy"
+
+compiler_version=$($compiler -dumpversion)
 
 # The m0 only supports thumb instructions, see:
 # http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0553a/index.html
@@ -26,7 +28,9 @@ objcopy="$gcc_dir/arm-none-eabi-objcopy"
 # Optimisations like -Os (size) can be set here
 compiler_args="-mcpu=cortex-m0 -mthumb -mabi=aapcs -Wall"
 
-sdk_includes="-I$sdk/Include -I$sdk/Include/gcc"
+sdk_includes="-I$sdk/Include -I$sdk/Include/gcc \
+	-I$sdk/Include/ble -I$sdk/Include/s110 \
+	-I$sdk/Include/app_common -I$sdk/Include/sd_common"
 
 system_nrf51="$sdk/Source/templates/system_nrf51.c"
 gcc_startup="$sdk/Source/templates/gcc/gcc_startup_nrf51.s"
@@ -34,10 +38,12 @@ gcc_startup="$sdk/Source/templates/gcc/gcc_startup_nrf51.s"
 nrf_delay="$sdk/Source/nrf_delay/nrf_delay.c"
 
 # Required by Include/nrf.h
-sdk_flags="-DNRF51"
+sdk_flags="-DNRF51 -DBOARD_PCA10001"
 
-linker_includes="-L$sdk/Source/templates/gcc"
 linker_script="-T$sdk/Source/templates/gcc/gcc_nrf51_s110_xxaa.ld"
+linker_includes="-L$sdk/Source/templates/gcc \
+	-L$gcc_dir/arm-none-eabi/lib/armv6-m \
+	-L$gcc_dir/lib/gcc/arm-none-eabi/$compiler_version/armv6-m"
 
 rm *.out *.hex *.o 2>/dev/null #clean any existing object files
 
