@@ -29,8 +29,9 @@ compiler_version=$($compiler -dumpversion)
 compiler_args="-mcpu=cortex-m0 -mthumb -mabi=aapcs -Wall"
 
 sdk_includes="-I$sdk/Include -I$sdk/Include/gcc \
-	-I$sdk/Include/ble -I$sdk/Include/s110 \
-	-I$sdk/Include/app_common -I$sdk/Include/sd_common"
+	-I$sdk/Include/ble -I$sdk/Include/ble/ble_services \
+	-I$sdk/Include/s110 -I$sdk/Include/app_common \
+	-I$sdk/Include/sd_common"
 
 system_nrf51="$sdk/Source/templates/system_nrf51.c"
 gcc_startup="$sdk/Source/templates/gcc/gcc_startup_nrf51.s"

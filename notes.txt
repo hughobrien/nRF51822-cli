@@ -1,0 +1,3 @@
+Starting with S110 v7 certain protection mechanisms for the SD are not enabled by default. The Nordic tools allow these mechanisms to be re-enabled but these tools do not.
+
+Refer to s110_nrf51822_7.0.0_migration-document.pdf and s110_nrf51822_7.0.0_releasenotes.pdf
