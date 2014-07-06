@@ -9,7 +9,7 @@
 
 [ -z $(command -v JLinkExe) ] && echo "Put Segger's JLinkExe on the path" && exit
 
-soft_device="/home/hugh/nrf/s110/s110_nrf51822_6.0.0_softdevice.hex"
+soft_device="/home/hugh/nrf/s110/s110_nrf51822_7.0.0_softdevice.hex"
 application="a.hex"
 
 [ ! -f "$soft_device" ] && echo "Set SoftDevice Path" && exit
